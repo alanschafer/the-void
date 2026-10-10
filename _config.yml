@@ -1,3 +1,9 @@
-    title: The Void
-   description: My books and other writing
-   theme: jekyll-theme-hacker
+title: The Void
+description: My books and other writing
+author: Jamie Shaffer
+baseurl: /the-void
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
