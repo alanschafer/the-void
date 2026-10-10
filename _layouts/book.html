@@ -1,0 +1,16 @@
+---
+layout: default
+body_class: reading
+---
+<article class="book">
+  <header class="book-head">
+    <h1>{{ page.title }}</h1>
+    {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+    <p class="byline">{{ page.author | default: site.author }}</p>
+    <div class="rule" aria-hidden="true"></div>
+  </header>
+  <div class="book-text">
+    {{ content }}
+  </div>
+  <p class="back"><a href="{{ '/books/' | relative_url }}">Back to all books</a></p>
+</article>
