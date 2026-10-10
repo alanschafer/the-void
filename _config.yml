@@ -1,9 +1,23 @@
 title: The Void
-description: My books and other writing
+tagline: works from the void
 author: Jamie Shaffer
-baseurl:
+description: Books by Jamie Shaffer.
+
+# If your repo is named something other than "the-void", change baseurl to match: "/your-repo-name"
+url: "https://alanschafer.github.io"
+baseurl: "/the-void"
+
+collections:
+  books:
+    output: true
+    permalink: /books/:name/
+
 defaults:
   - scope:
       path: ""
+      type: books
     values:
-      layout: default
+      layout: book
+
+exclude:
+  - README.md
