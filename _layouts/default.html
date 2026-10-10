@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% unless page.url == '/' %}{{ page.title }} · {% endunless %}{{ site.title }}</title>
-<meta name="description" content="{{ site.description }}">
-<meta name="theme-color" content="#050505">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title and page.url != "/" %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.summary | default: site.description }}">
+  <meta name="theme-color" content="#000000">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
-<body class="{% if page.url == '/' %}home{% else %}reading{% endif %}">
-<header class="site-header">
-  <a class="brand" href="{{ '/' | relative_url }}">The Void</a>
-  <a class="nav-link" href="{{ '/' | relative_url }}">The Collection</a>
-</header>
-<div class="rule"><span>◆</span></div>
-<main>
-{{ content }}
-</main>
-<div class="rule"><span>◆</span></div>
-<footer class="site-footer">© {{ 'now' | date: '%Y' }} · {{ site.author }}</footer>
+<body class="{{ page.body_class }}">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="bar">
+    <a class="mark" href="{{ '/' | relative_url }}">The Void</a>
+    <nav>
+      <a href="{{ '/books/' | relative_url }}"{% if page.url contains '/books' %} aria-current="page"{% endif %}>Books</a>
+      <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
+    </nav>
+  </header>
+  <main id="main">
+    {{ content }}
+  </main>
+  <footer class="foot">
+    <span>{{ site.title }}: {{ site.tagline }}</span>
+    <span>&copy; {{ site.time | date: "%Y" }} {{ site.author }}</span>
+  </footer>
 </body>
 </html>
