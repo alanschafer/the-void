@@ -1,0 +1,19 @@
+---
+layout: default
+title: Books
+permalink: /books/
+---
+<section class="shelf page-shelf">
+  <h1>Books</h1>
+  <div class="cards">
+    {% for book in site.books %}
+    <a class="card" href="{{ book.url | relative_url }}">
+      <span class="cover">
+        <span class="cover-title">{{ book.title }}</span>
+        <span class="cover-author">{{ book.author | default: site.author }}</span>
+      </span>
+      {% if book.summary %}<span class="card-note">{{ book.summary }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
