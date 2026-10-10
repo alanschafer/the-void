@@ -1,87 +1,127 @@
 :root{
-  --bg:#07070c; --panel:#0e0e17; --line:#1e1e2e;
-  --text:#d8d8e4; --muted:#8b8ba3; --accent:#b79cff; --gold:#ffd79a;
+  --bg:#050505; --panel:#0b0a08; --line:rgba(201,162,76,.28);
+  --text:#e8e0d0; --muted:#9a917f; --gold:#c9a24c; --gold-light:#f3dc9c; --gold-deep:#8a6a22;
+  --goldgrad:linear-gradient(135deg,#8a6a22 0%,#f3dc9c 35%,#c9a24c 55%,#f3dc9c 75%,#8a6a22 100%);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0; min-height:100vh; display:flex; flex-direction:column;
   background-color:var(--bg);
-  background-image:radial-gradient(ellipse 80% 50% at 50% -10%, #231a45 0%, transparent 70%);
+  background-image:
+    radial-gradient(ellipse 70% 45% at 50% -5%, rgba(201,162,76,.16) 0%, transparent 70%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, transparent 55%, rgba(0,0,0,.7) 100%);
   background-repeat:no-repeat; background-attachment:fixed;
-  color:var(--text); font:300 17px/1.7 Inter,system-ui,sans-serif;
+  color:var(--text); font:400 18px/1.7 'EB Garamond',Georgia,serif;
   -webkit-font-smoothing:antialiased;
+  animation:fadein 1.4s ease both;
 }
-a{color:var(--accent); text-decoration:none}
-a:hover{color:var(--gold)}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+a{color:var(--gold); text-decoration:none; transition:color .3s}
+a:hover{color:var(--gold-light)}
+::selection{background:var(--gold); color:#000}
 
 .site-header{
   display:flex; justify-content:space-between; align-items:center;
-  padding:22px 28px; max-width:1000px; width:100%; margin:0 auto;
+  padding:26px 32px; max-width:1040px; width:100%; margin:0 auto;
 }
 .brand{
-  font:600 1.5rem 'Cormorant Garamond',serif; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--text);
+  font:500 1.25rem Cinzel,serif; letter-spacing:.42em; text-transform:uppercase;
+  background:var(--goldgrad); -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-.nav-link{font-size:.85rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+.nav-link{
+  font:400 .72rem Cinzel,serif; letter-spacing:.3em; text-transform:uppercase; color:var(--muted);
+}
+.rule{
+  max-width:1040px; width:calc(100% - 64px); margin:0 auto; display:flex; align-items:center; gap:16px;
+  color:var(--gold); font-size:.6rem;
+}
+.rule::before,.rule::after{content:""; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--line),transparent)}
 
-main{flex:1; width:100%; max-width:1000px; margin:0 auto; padding:0 28px}
+main{flex:1; width:100%; max-width:1040px; margin:0 auto; padding:0 32px}
 
 /* Home */
-.home .hero{text-align:center; padding:90px 0 60px}
+.home .hero{text-align:center; padding:110px 0 70px}
 .home .hero h1{
-  font:600 clamp(3rem,10vw,6rem)/1 'Cormorant Garamond',serif;
-  letter-spacing:.25em; text-transform:uppercase; margin:0 0 18px;
-  background:linear-gradient(180deg,#fff,#a89bd6); -webkit-background-clip:text;
-  background-clip:text; color:transparent;
+  font:500 clamp(2.8rem,9vw,5.8rem)/1.05 Cinzel,serif; letter-spacing:.3em; text-transform:uppercase;
+  margin:0 0 26px; padding-left:.3em;
+  background:var(--goldgrad); background-size:200% auto; -webkit-background-clip:text;
+  background-clip:text; color:transparent; animation:shine 8s linear infinite;
 }
-.home .lede{color:var(--muted); font-size:1.1rem; letter-spacing:.05em; margin:0}
+@keyframes shine{to{background-position:200% center}}
+.home .lede{
+  font:italic 400 1.35rem 'Cormorant Garamond',serif; color:var(--muted); letter-spacing:.06em; margin:0;
+}
+.home .lede::before,.home .lede::after{content:"—"; color:var(--gold-deep); margin:0 .8em}
 .books{
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:22px; padding:20px 0 80px;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:30px; padding:30px 0 100px;
 }
 .card{
-  display:block; padding:30px 28px; background:var(--panel);
-  border:1px solid var(--line); border-radius:14px; color:var(--text);
-  transition:transform .25s, border-color .25s, box-shadow .25s;
+  position:relative; display:block; padding:44px 34px 38px; text-align:center;
+  background:linear-gradient(180deg,#0f0d09,#070605);
+  border:1px solid var(--line); color:var(--text);
+  transition:transform .4s, border-color .4s, box-shadow .4s;
+}
+.card::before{
+  content:""; position:absolute; inset:7px; border:1px solid rgba(201,162,76,.14); pointer-events:none;
 }
 .card:hover{
-  transform:translateY(-4px); border-color:var(--accent); color:var(--text);
-  box-shadow:0 12px 40px rgba(120,90,220,.18);
+  transform:translateY(-6px); border-color:var(--gold); color:var(--text);
+  box-shadow:0 18px 60px rgba(201,162,76,.14), 0 0 0 1px rgba(201,162,76,.1);
 }
-.card-kicker{
-  font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold);
+.card-kicker{font:400 .68rem Cinzel,serif; letter-spacing:.35em; text-transform:uppercase; color:var(--gold)}
+.card h2{
+  font:500 2rem/1.2 'Cormorant Garamond',serif; margin:18px 0 14px; color:var(--gold-light);
 }
-.card h2{font:600 1.8rem/1.2 'Cormorant Garamond',serif; margin:10px 0 12px; color:#fff}
-.card p{color:var(--muted); font-size:.95rem; margin:0 0 18px}
-.card-link{font-size:.85rem; letter-spacing:.1em; color:var(--accent)}
+.card p{font:italic 400 1.05rem 'Cormorant Garamond',serif; color:var(--muted); margin:0 0 24px}
+.card-link{font:400 .7rem Cinzel,serif; letter-spacing:.3em; text-transform:uppercase; color:var(--gold)}
+.card-link::after{content:" →"}
 
-/* Reading pages */
-.reading main{max-width:680px; padding-bottom:70px}
+/* Reading */
+.reading main{max-width:700px; padding-bottom:90px}
 .reading main h1{
-  font:600 clamp(2.4rem,7vw,3.6rem)/1.1 'Cormorant Garamond',serif;
-  text-align:center; color:#fff; margin:50px 0 40px;
+  font:500 clamp(2.2rem,7vw,3.4rem)/1.15 'Cormorant Garamond',serif; text-align:center;
+  margin:80px 0 12px;
+  background:var(--goldgrad); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.reading main h1::after{
+  content:"◆"; display:block; font-size:.6rem; margin:26px 0 50px; color:var(--gold);
+  -webkit-text-fill-color:var(--gold);
 }
 .reading main h2,.reading main h3{
-  font-family:'Cormorant Garamond',serif; color:#fff; font-weight:600;
-  margin:2.4em 0 .6em; line-height:1.2;
+  font-family:'Cormorant Garamond',serif; font-weight:500; color:var(--gold-light);
+  text-align:center; line-height:1.2;
 }
-.reading main h2{font-size:2rem}
-.reading main h3{font-size:1.5rem}
-.reading main p,.reading main li{font:400 1.15rem/1.85 Lora,Georgia,serif}
-.reading main p{margin:0 0 1.2em}
+.reading main h2{font-size:2.1rem; margin:3em 0 1em}
+.reading main h2::before{
+  content:"◆ ◆ ◆"; display:block; font-size:.5rem; letter-spacing:1em; color:var(--gold-deep); margin-bottom:18px;
+}
+.reading main h3{font-size:1.5rem; margin:2.2em 0 .6em}
+.reading main p,.reading main li{font:400 1.22rem/1.9 'EB Garamond',Georgia,serif}
+.reading main p{margin:0 0 1.3em}
+.reading main h1 + p::first-letter,
+.reading main h2 + p::first-letter{
+  float:left; font:500 4.2rem/.8 'Cormorant Garamond',serif; padding:.08em .1em 0 0; color:var(--gold);
+}
 .reading main blockquote{
-  margin:1.8em 0; padding:.2em 0 .2em 1.4em;
-  border-left:2px solid var(--accent); color:var(--muted); font-style:italic;
+  margin:2em 0; padding:.3em 0 .3em 1.6em; border-left:1px solid var(--gold);
+  color:var(--muted); font-style:italic;
 }
-.reading main hr{border:0; height:1px; background:var(--line); margin:3em 0}
+.reading main hr{
+  border:0; height:1px; margin:3.5em auto; width:40%;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.reading main a{border-bottom:1px solid var(--gold-deep)}
 
 .site-footer{
-  text-align:center; padding:30px; color:var(--muted);
-  font-size:.8rem; letter-spacing:.08em; border-top:1px solid var(--line);
+  text-align:center; padding:34px; color:var(--muted);
+  font:400 .7rem Cinzel,serif; letter-spacing:.3em; text-transform:uppercase;
 }
 @media (max-width:600px){
-  body{font-size:16px}
-  .site-header{padding:18px}
-  main{padding:0 18px}
+  body{font-size:17px}
+  .site-header{padding:20px; flex-direction:column; gap:10px}
+  main{padding:0 20px}
+  .home .hero{padding:70px 0 40px}
+  .rule{width:calc(100% - 40px)}
 }
