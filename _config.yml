@@ -1,7 +1,7 @@
 title: The Void
 description: My books and other writing
 author: Jamie Shaffer
-baseurl: /the-void
+baseurl:
 defaults:
   - scope:
       path: ""
